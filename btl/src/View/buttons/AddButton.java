@@ -23,7 +23,7 @@ public class AddButton extends Button {
     public void buttonConfig() {
         button.setText("Add Word");
         button.setPreferredSize(new Dimension(200, 50));
-        button.setIcon(new ImageIcon("src/resources/icon/add_icon.png"));
+        button.setIcon(new ImageIcon("btl/src/resources/icon/add_icon.png"));
         // addButton.setIconTextGap(10);
         button.addActionListener(new ActionListener() {
             @Override

@@ -22,7 +22,7 @@ public class HistoryButton extends Button {
     public void buttonConfig() {
         button.setText("Show History");
         button.setPreferredSize(new Dimension(200, 50));
-        button.setIcon(new ImageIcon("src/resources/icon/history_icon.png"));
+        button.setIcon(new ImageIcon("btl/src/resources/icon/history_icon.png"));
         // addButton.setIconTextGap(10);
         button.addActionListener(new ActionListener() {
             @Override

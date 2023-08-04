@@ -22,7 +22,7 @@ public class RemoveButton extends Button {
     public void buttonConfig() {
         button.setText("Remove Word");
         button.setPreferredSize(new Dimension(200, 50));
-        button.setIcon(new ImageIcon("src/resources/icon/remove_icon.png"));
+        button.setIcon(new ImageIcon("btl/src/resources/icon/remove_icon.png"));
         // removeButton.setIconTextGap(10);
         button.addActionListener(new ActionListener() {
             @Override

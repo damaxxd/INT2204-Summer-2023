@@ -23,7 +23,7 @@ public class FindButton extends Button {
     public void buttonConfig() {
         button.setText("Find Word");
         button.setPreferredSize(new Dimension(200, 50));
-        button.setIcon(new ImageIcon("src/resources/icon/find_icon.png"));
+        button.setIcon(new ImageIcon("btl/src/resources/icon/find_icon.png"));
         // findButton.setIconTextGap(0);
         button.addActionListener(new ActionListener() {
             @Override

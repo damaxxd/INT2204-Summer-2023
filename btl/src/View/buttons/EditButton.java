@@ -22,7 +22,7 @@ public class EditButton extends Button {
     public void buttonConfig() {
         button.setText("Edit Word");
         button.setPreferredSize(new Dimension(200, 50));
-        button.setIcon(new ImageIcon("src/resources/icon/edit_icon.png"));
+        button.setIcon(new ImageIcon("btl/src/resources/icon/edit_icon.png"));
         // editButton.setIconTextGap(10);
         button.addActionListener(new ActionListener() {
             @Override

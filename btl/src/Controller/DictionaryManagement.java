@@ -15,6 +15,9 @@ public class DictionaryManagement {
 
     public static Trie wordTrie = new Trie();
 
+    private static String historyPath = "btl/src/resources/data/history.txt";
+    private static String dataPath = "btl/src/resources/data/dictionaries.txt";
+
     public DictionaryManagement() {
         
     }
@@ -63,7 +66,7 @@ public class DictionaryManagement {
      * Load data from history file
      */
     public static void loadHistoryFile() throws IOException {
-        File file = new File("src/resources/data/history.txt");
+        File file = new File(historyPath);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String cur_line = sc.nextLine();
@@ -80,7 +83,7 @@ public class DictionaryManagement {
      * Load data from dictionary data file.
      */
     public static void insertFromFile() throws IOException {
-        File file = new File("src/resources/data/dictionaries.txt");
+        File file = new File(dataPath);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String cur_line = sc.nextLine();
@@ -174,7 +177,7 @@ public class DictionaryManagement {
      * Export data to file.
      */
     public static void dictionaryExportToFile() throws IOException {
-        FileWriter writer = new FileWriter("src/resources/data/dictionaries.txt");
+        FileWriter writer = new FileWriter(dataPath);
         for (Word word : Dictionary.dict) {
             writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
         }
@@ -186,7 +189,7 @@ public class DictionaryManagement {
      * Write data to history file.
      */
     public static void dictionaryExportToHistory() throws IOException {
-        FileWriter writer = new FileWriter("src/resources/data/history.txt");
+        FileWriter writer = new FileWriter(historyPath);
         for (Word word : Dictionary.historyWords) {
             writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
         }
