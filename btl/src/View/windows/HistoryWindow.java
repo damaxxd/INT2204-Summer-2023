@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.Stack;
 
 import java.awt.FlowLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,18 +39,25 @@ public class HistoryWindow extends Window {
      */
     public void panelConfig() {
         panel = new JPanel();
+
+        JPanel wordPanel = new JPanel();
+        wordPanel.setLayout(new BoxLayout(wordPanel, BoxLayout.Y_AXIS));
         Stack<Word> currentHistory = HistoryWindowController.getHistoryWordsStack();
         int index = 1;
         for (Word word : currentHistory) {
-            panel.add(new JLabel("   " + index + ". "
-                        + word.getWordTarget() + " : " + word.getWordExplain() + "\n"));
+            wordPanel.add(new JLabel("   " + index + ". "
+                    + word.getWordTarget() + " : " + word.getWordExplain() + System.lineSeparator()));
             index++;
         }
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT)); // align left
-        panel.add(new JLabel("\n"));
+        wordPanel.add(new JLabel(System.lineSeparator()));
 
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton clearHistoryButton = (new ClearHistoryButton()).getButton();
-        panel.add(clearHistoryButton);
+        buttonPanel.add(clearHistoryButton);
+
+        panel.add(wordPanel);
+        panel.add(buttonPanel);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class FavoriteWindow extends Window {
         int index = 1;
         for (Word word : favoriteList) {
             panel.add(new JLabel("   " + index + ". "
-                        + word.getWordTarget() + " : " + word.getWordExplain() + "\n"));
+                        + word.getWordTarget() + " : " + word.getWordExplain() + System.lineSeparator()));
             index++;
         }
         panel.setLayout(new FlowLayout(FlowLayout.LEFT)); // align left
