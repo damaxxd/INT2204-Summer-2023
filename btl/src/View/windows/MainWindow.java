@@ -15,11 +15,23 @@ import View.buttons.HistoryButton;
 import View.buttons.RemoveButton;
 
 public class MainWindow extends Window {
+    JButton findButton;
+    JButton addButton;
+    JButton removeButton;
+    JButton editButton;
+    JButton historyButton;
+    JButton favoriteButton;
+    
     /**
      *  Constructor.
      */
     public MainWindow() {
         super();
+        findButton = (new FindButton()).getButton();
+        addButton = (new AddButton()).getButton();
+        removeButton = (new RemoveButton()).getButton();
+        editButton = (new EditButton()).getButton();
+        historyButton = (new HistoryButton()).getButton();
     }
 
     @Override
@@ -38,34 +50,10 @@ public class MainWindow extends Window {
      */
     public void panelConfig() {
         panel = new JPanel();
-        /**
-         * Find Button.
-         */
-        JButton findButton = (new FindButton()).getButton();
         panel.add(findButton);
-
-        /**
-         * Add Button.
-         */
-        JButton addButton = (new AddButton()).getButton();
         panel.add(addButton);
-
-        /**
-         * Remove Button.
-         */
-        JButton removeButton = (new RemoveButton()).getButton();
         panel.add(removeButton);
-
-        /**
-         * Edit Button.
-         */
-        JButton editButton = (new EditButton()).getButton();
         panel.add(editButton);
-
-        /**
-         * History Button.
-         */
-        JButton historyButton = (new HistoryButton()).getButton();
         panel.add(historyButton);
     }
 

@@ -3,6 +3,7 @@ package Controller.WindowsController;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Model.Word;
@@ -40,6 +41,10 @@ public class FavoriteWindowController {
             }
         }
         sc.close();
+    }
+
+    public static ArrayList<Word> getFavoriteWordsList() {
+        return Dictionary.getFavoriteWords();
     }
 
     public static void addFavoriteWord() {

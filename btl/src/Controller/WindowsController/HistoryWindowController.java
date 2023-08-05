@@ -6,6 +6,7 @@ import Controller.DictionaryManagement;
 import Model.Dictionary;
 import Model.Word;
 import View.buttons.HistoryButton;
+import View.windows.HistoryWindow;
 
 public class HistoryWindowController {
     public static Stack<Word> getHistoryWordsStack() {
@@ -16,6 +17,10 @@ public class HistoryWindowController {
         Dictionary.clearHistoryWords();
         try {
             DictionaryManagement.dictionaryExportToHistory();
+
+            HistoryButton.historyWindow.closeWindow();
+            HistoryButton.historyWindow = new HistoryWindow();
+            HistoryButton.historyWindow.displayWindow();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }

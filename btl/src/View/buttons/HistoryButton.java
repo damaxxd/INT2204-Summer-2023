@@ -8,9 +8,8 @@ import javax.swing.ImageIcon;
 import View.windows.HistoryWindow;
 
 public class HistoryButton extends Button {
+    public static HistoryWindow historyWindow;
 
-    HistoryWindow historyWindow = new HistoryWindow();
-    
     public HistoryButton() {
         super();
     }
@@ -27,6 +26,7 @@ public class HistoryButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                historyWindow = new HistoryWindow();
                 historyWindow.displayWindow();
             }
         });
