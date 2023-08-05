@@ -8,8 +8,10 @@ import java.util.Scanner;
 import Model.Word;
 import Model.Dictionary;
 
+
+// Controller for favorite word window
 public class FavoriteWindowController {
-    // path to favirite word file
+    // path to favorite word file
     private static final String FAVORITE_PATH = "btl/src/resources/data/favorites.txt";
 
     /**
