@@ -9,7 +9,7 @@ import View.buttons.HistoryButton;
 
 public class HistoryWindowController {
     public static Stack<Word> getHistoryWordsStack() {
-        return Dictionary.gethistoryWords();
+        return Dictionary.getHistoryWords();
     }
 
     public static void clearHistoryWordsStack() {

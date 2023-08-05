@@ -7,6 +7,8 @@ import View.buttons.ClearHistoryButton;
 import java.util.Set;
 import java.util.Stack;
 
+
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,9 +42,10 @@ public class HistoryWindow extends Window {
         int index = 1;
         for (Word word : currentHistory) {
             panel.add(new JLabel("   " + index + ". "
-                        + word.getWordTarget() + ": " + word.getWordExplain() + "\n"));
+                        + word.getWordTarget() + " : " + word.getWordExplain() + "\n"));
             index++;
         }
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT)); // align left
         // panel.add(new JLabel("\n"));
         // JButton clearHistoryButton = (new ClearHistoryButton()).getButton();
         // panel.add(clearHistoryButton);
