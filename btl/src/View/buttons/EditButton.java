@@ -24,6 +24,7 @@ public class EditButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                EditWindowController.disposeWindow();
                 EditWindowController.openWindow();
             }
         });

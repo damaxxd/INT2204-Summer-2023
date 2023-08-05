@@ -4,7 +4,7 @@ import Controller.DictionaryManagement;
 import View.windows.EditWindow;
 
 public class EditWindowController {
-    private static EditWindow editWindow;
+    private static EditWindow editWindow = new EditWindow();
 
     public static String editTargetWord(String targetWord, String explainWord) {
         try {
