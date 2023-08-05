@@ -4,13 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-import View.windows.FindWindow;
+import Controller.WindowsController.FindWindowController;
 
 public class FindButton extends Button {
-
-    FindWindow findWindow = new FindWindow();
 
     public FindButton() {
         super();
@@ -28,7 +25,8 @@ public class FindButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                findWindow.displayWindow();
+                FindWindowController.disposeWindow();
+                FindWindowController.openWindow();
             }
         });
     }

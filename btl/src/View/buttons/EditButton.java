@@ -4,13 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-import View.windows.EditWindow;
+import Controller.WindowsController.EditWindowController;
 
 public class EditButton extends Button {
-    EditWindow editWindow = new EditWindow();
-    
     public EditButton() {
         super();
     }
@@ -27,7 +24,8 @@ public class EditButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editWindow.displayWindow();
+                EditWindowController.disposeWindow();
+                EditWindowController.openWindow();
             }
         });
     }

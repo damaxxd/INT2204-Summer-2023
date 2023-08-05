@@ -5,10 +5,11 @@ import java.util.Stack;
 import Controller.DictionaryManagement;
 import Model.Dictionary;
 import Model.Word;
-import View.buttons.HistoryButton;
 import View.windows.HistoryWindow;
 
 public class HistoryWindowController {
+    private static HistoryWindow historyWindow = new HistoryWindow();
+
     public static Stack<Word> getHistoryWordsStack() {
         return Dictionary.getHistoryWords();
     }
@@ -17,12 +18,22 @@ public class HistoryWindowController {
         Dictionary.clearHistoryWords();
         try {
             DictionaryManagement.dictionaryExportToHistory();
-
-            HistoryButton.historyWindow.closeWindow();
-            HistoryButton.historyWindow = new HistoryWindow();
-            HistoryButton.historyWindow.displayWindow();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
+
+    /**
+     * Somehow JFrame dispose method don't clear all the data so we close (dispose)
+     * and then create a new find Window object.
+     */
+    public static void disposeWindow() {
+        historyWindow.closeWindow();
+        historyWindow = new HistoryWindow();
+    }
+
+    public static void openWindow() {
+        historyWindow.displayWindow();
+    }
+    
 }

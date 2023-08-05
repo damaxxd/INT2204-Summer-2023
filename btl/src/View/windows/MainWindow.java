@@ -62,7 +62,6 @@ public class MainWindow extends Window {
      * Display this window.
      */
     public void displayWindow() {
-        window.dispose(); // if double click then dispose the previous one
         windowConfig();
         panelConfig();
         window.add(panel);

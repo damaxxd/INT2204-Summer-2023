@@ -4,15 +4,15 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Controller.WindowsController.HistoryWindowController;
 
-public class ClearHistoryButton extends Button {
-    public ClearHistoryButton() {
+public class FavoriteButton extends Button {
+    public FavoriteButton() {
         super();
     }
 
+    @Override
     /**
-     * Button config.
+     * Favorite Button Config.
      */
     public void buttonConfig() {
         button.setText("Clear History");
@@ -21,9 +21,7 @@ public class ClearHistoryButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HistoryWindowController.clearHistoryWordsStack();
-                HistoryWindowController.disposeWindow();
-                HistoryWindowController.openWindow();
+                
             }
         });
     }

@@ -1,7 +1,6 @@
 package View.windows;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -38,7 +37,7 @@ public class FavoriteWindow extends Window {
         int index = 1;
         for (Word word : favoriteList) {
             panel.add(new JLabel("   " + index + ". "
-                        + word.getWordTarget() + " : " + word.getWordExplain() + "\n"));
+                        + word.getWordTarget() + " : " + word.getWordExplain() + System.lineSeparator()));
             index++;
         }
         panel.setLayout(new FlowLayout(FlowLayout.LEFT)); // align left
@@ -49,7 +48,6 @@ public class FavoriteWindow extends Window {
      * Display this window.
      */
     public void displayWindow() {
-        window.dispose(); // if double click then dispose the previous one
         windowConfig();
         panelConfig();
         window.add(panel);

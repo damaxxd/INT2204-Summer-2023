@@ -2675,7 +2675,6 @@ sea	n. /si:/ biển
 seal	n., v. /si:l/ hải cẩu; săn hải cẩu
 search	n., v. /sə:t∫/ sự tìm kiếm, sự thăm dò, sự điều tra; tìm kiếm, thăm dò, điều tra
 season	n. /´si:zən/ mùa
-seat	n. /si:t/ ghế, chỗ ngồi
 second	det., ordinal number, adv., n. /ˈsɛkənd/ thứ hai, ở vị trí thứ 2, thứ nhì; người về nhì
 secondary	adj. /´sekəndəri/ trung học, thứ yếu
 secret	adj., n. /'si:krit/ bí mật; điều bí mật
@@ -3515,5 +3514,3 @@ youth	n. /ju:θ/ tuổi trẻ, tuổi xuân, tuổi thanh niên, tuổi niên th
 zero	number /'ziərou/ số không
 zone	n. /zoun/ khu vực, miền, vùng
 Cuon	Hai Anh
-phobia	noi so hai
-phobia	noi so
