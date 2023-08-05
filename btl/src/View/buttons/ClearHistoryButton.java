@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Controller.WindowsController.HistoryWindowController;
-import View.buttons.HistoryButton.*;
-import View.windows.HistoryWindow;
 
 public class ClearHistoryButton extends Button {
     public ClearHistoryButton() {
@@ -24,6 +22,8 @@ public class ClearHistoryButton extends Button {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HistoryWindowController.clearHistoryWordsStack();
+                HistoryWindowController.disposeWindow();
+                HistoryWindowController.openWindow();
             }
         });
     }

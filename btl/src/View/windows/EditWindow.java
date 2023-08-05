@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -131,7 +132,6 @@ public class EditWindow extends Window {
      * Display this window.
      */
     public void displayWindow() {
-        window.dispose(); // if double click then dispose the previous one
         windowConfig();
         panelConfig();
         window.add(panel);

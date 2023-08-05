@@ -1,7 +1,6 @@
 package View.windows;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -49,7 +48,6 @@ public class FavoriteWindow extends Window {
      * Display this window.
      */
     public void displayWindow() {
-        window.dispose(); // if double click then dispose the previous one
         windowConfig();
         panelConfig();
         window.add(panel);

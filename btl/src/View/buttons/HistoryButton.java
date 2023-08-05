@@ -5,11 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
-import View.windows.HistoryWindow;
+import Controller.WindowsController.HistoryWindowController;
 
 public class HistoryButton extends Button {
-    public static HistoryWindow historyWindow;
-
     public HistoryButton() {
         super();
     }
@@ -26,8 +24,8 @@ public class HistoryButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                historyWindow = new HistoryWindow();
-                historyWindow.displayWindow();
+                HistoryWindowController.disposeWindow(); // dispose the previous window if double click
+                HistoryWindowController.openWindow();
             }
         });
     }

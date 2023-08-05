@@ -11,7 +11,6 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 public class HistoryWindow extends Window {
 
@@ -57,7 +56,6 @@ public class HistoryWindow extends Window {
      * Display this window.
      */
     public void displayWindow() {
-        window.dispose(); // if double click then dispose the previous one
         windowConfig();
         panelConfig();
         window.add(panel);

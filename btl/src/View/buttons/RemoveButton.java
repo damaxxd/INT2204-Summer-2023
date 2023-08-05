@@ -4,12 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-import View.windows.RemoveWindow;
+import Controller.WindowsController.RemoveWindowController;
 
 public class RemoveButton extends Button {
-    RemoveWindow removeWindow = new RemoveWindow();
     
     public RemoveButton() {
         super();
@@ -27,7 +25,8 @@ public class RemoveButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeWindow.displayWindow();
+                RemoveWindowController.disposeWindow();
+                RemoveWindowController.openWindow();
             }
         });
     }

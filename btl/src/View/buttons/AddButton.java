@@ -4,13 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-import View.windows.AddWindow;
+import Controller.WindowsController.AddWindowController;
 
 public class AddButton extends Button {
-    
-    AddWindow addWindow = new AddWindow();
     
     public AddButton() {
         super();
@@ -28,7 +25,8 @@ public class AddButton extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addWindow.displayWindow();
+                AddWindowController.disposeWindow();
+                AddWindowController.openWindow();
             }
         });
     }
