@@ -46,7 +46,7 @@ public class HistoryWindow extends Window {
         int index = 1;
         for (Word word : currentHistory) {
             wordPanel.add(new JLabel("   " + index + ". "
-                    + word.getWordTarget() + " : " + word.getWordExplain() + "\n"));
+                    + word.getWordTarget() + " : " + word.getWordExplain() + System.lineSeparator()));
             index++;
         }
         wordPanel.add(new JLabel(System.lineSeparator()));
