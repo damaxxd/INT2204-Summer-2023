@@ -1,24 +1,20 @@
 package View.windows;
 
-import Controller.WindowsController.HistoryWindowController;
-import Model.Word;
-import View.buttons.ClearHistoryButton;
-
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import java.awt.FlowLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
-public class HistoryWindow extends Window {
+import Controller.WindowsController.FavoriteWindowController;
+import Model.Word;
 
+public class FavoriteWindow extends Window {
     /**
      * Constructor.
      */
-    public HistoryWindow() {
+    public FavoriteWindow() {
         super();
     }
 
@@ -27,7 +23,7 @@ public class HistoryWindow extends Window {
      * History Window Config.
      */
     public void windowConfig() {
-        window.setTitle("History Words");
+        window.setTitle("Favorite Words");
         window.setSize(350, 400);
         window.setLocationRelativeTo(null);
     }
@@ -38,18 +34,14 @@ public class HistoryWindow extends Window {
      */
     public void panelConfig() {
         panel = new JPanel();
-        Stack<Word> currentHistory = HistoryWindowController.getHistoryWordsStack();
+        ArrayList<Word> favoriteList = FavoriteWindowController.getFavoriteWordsList();
         int index = 1;
-        for (Word word : currentHistory) {
+        for (Word word : favoriteList) {
             panel.add(new JLabel("   " + index + ". "
                         + word.getWordTarget() + " : " + word.getWordExplain() + "\n"));
             index++;
         }
         panel.setLayout(new FlowLayout(FlowLayout.LEFT)); // align left
-        panel.add(new JLabel("\n"));
-
-        JButton clearHistoryButton = (new ClearHistoryButton()).getButton();
-        panel.add(clearHistoryButton);
     }
 
     @Override

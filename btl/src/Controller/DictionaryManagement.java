@@ -11,12 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DictionaryManagement {
-    private static Scanner sc = new Scanner(System.in);
+    private final static String HISTORY_PATH = "btl/src/resources/data/history.txt";
+    private final static String DATA_PATH = "btl/src/resources/data/dictionaries.txt";
 
-    public static Trie wordTrie = new Trie();
-
-    private static String historyPath = "btl/src/resources/data/history.txt";
-    private static String dataPath = "btl/src/resources/data/dictionaries.txt";
+    private static Trie wordTrie = new Trie();
 
     public DictionaryManagement() {
         
@@ -42,31 +40,10 @@ public class DictionaryManagement {
     }
 
     /**
-     * Insert number of word to translate.
-     * Insert words and theirs translation.
-     */
-    public static void insertFromCommandline() throws IOException {
-        insertFromFile();
-        System.out.print("Number of word: ");
-        int num = sc.nextInt();
-        sc.nextLine();
-        for (int i = 0; i < num; i++) {
-            System.out.print("Word:  ");
-            String word_target = sc.nextLine();
-            System.out.print("Meaning of Word: ");
-            String word_explain = sc.nextLine();
-            Word word = new Word(word_target, word_explain);
-            Dictionary.dict.add(word);
-            wordTrie.insertWordToTrie(word);
-        }
-        sc.close();
-    }
-
-    /**
      * Load data from history file
      */
     public static void loadHistoryFile() throws IOException {
-        File file = new File(historyPath);
+        File file = new File(HISTORY_PATH);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String cur_line = sc.nextLine();
@@ -83,7 +60,7 @@ public class DictionaryManagement {
      * Load data from dictionary data file.
      */
     public static void insertFromFile() throws IOException {
-        File file = new File(dataPath);
+        File file = new File(DATA_PATH);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String cur_line = sc.nextLine();
@@ -177,7 +154,7 @@ public class DictionaryManagement {
      * Export data to file.
      */
     public static void dictionaryExportToFile() throws IOException {
-        FileWriter writer = new FileWriter(dataPath);
+        FileWriter writer = new FileWriter(DATA_PATH);
         for (Word word : Dictionary.dict) {
             writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
         }
@@ -189,7 +166,7 @@ public class DictionaryManagement {
      * Write data to history file.
      */
     public static void dictionaryExportToHistory() throws IOException {
-        FileWriter writer = new FileWriter(historyPath);
+        FileWriter writer = new FileWriter(HISTORY_PATH);
         for (Word word : Dictionary.historyWords) {
             writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
         }

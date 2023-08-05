@@ -9,8 +9,15 @@ public class Dictionary {
     // store history of user's word finding
     public static Stack<Word> historyWords = new Stack<Word>();
 
-    public static Stack<Word> gethistoryWords() {
+    // store user's favorite word
+    public static ArrayList<Word> favoriteWords = new ArrayList<Word>();
+
+    public static Stack<Word> getHistoryWords() {
         return historyWords;
+    }
+
+    public static ArrayList<Word> getFavoriteWords() {
+        return favoriteWords;
     }
 
     public static void clearHistoryWords() {

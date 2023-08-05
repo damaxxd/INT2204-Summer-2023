@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities; // Execute on Event Dispatch Thread
 import java.io.IOException;
 
 import Controller.*;
+import Controller.WindowsController.FavoriteWindowController;
 import View.windows.MainWindow;
 
 class DictionaryApplication {
@@ -18,6 +19,7 @@ class DictionaryApplication {
                 try {
                     DictionaryManagement.insertFromFile();
                     DictionaryManagement.loadHistoryFile();
+                    FavoriteWindowController.loadFavoriteFile();
                 } catch (Exception e) {
                     System.out.println(e.getStackTrace());
                 }

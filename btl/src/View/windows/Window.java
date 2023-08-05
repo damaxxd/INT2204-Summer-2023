@@ -34,4 +34,11 @@ public abstract class Window {
      */
     public abstract void displayWindow();
 
+    /**
+     * Close window.
+     */
+    public void closeWindow() {
+        window.dispose();
+    }
+
 }
