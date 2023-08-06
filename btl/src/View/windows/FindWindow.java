@@ -89,7 +89,9 @@ public class FindWindow extends Window {
                 resWindow.setSize(350, 300);
                 resWindow.setLocationRelativeTo(null);
                 
-                String targetWord = inputLine.getText().toLowerCase(); // get input from user
+                String targetWord = inputLine.getText(); // get input from user
+                targetWord = targetWord.toLowerCase(); // to lower letter
+                targetWord = targetWord.trim(); // cut before and after space
                 String resultWord = FindWindowController.findWord(targetWord);
                 JTextArea resultTextArea;
                 if (resultWord == "") { // word not in dictionary
