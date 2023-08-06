@@ -88,12 +88,16 @@ public class RemoveWindow extends Window {
                 String targetWord = inputLine.getText(); // get word need to remove from user
 
                 String resultString = "";
-                RemoveWindowController.removeInputWord(targetWord);
-                if (DictionaryManagement.getIndexByWord(targetWord) == -1) { // Remove successfully (get word index in
-                                                                             // dict = -1)
-                    resultString = "Succesfully remove Word";
+                if (DictionaryManagement.getIndexByWord(targetWord) == -1) {
+                    resultString = "Word not found!";
                 } else {
-                    resultString = "Failed to remove Word";
+                    RemoveWindowController.removeInputWord(targetWord);
+                    if (DictionaryManagement.getIndexByWord(targetWord) == -1) { // Remove successfully (get word index in
+                                                                                 // dict = -1)
+                        resultString = "Succesfully remove Word";
+                    } else {
+                        resultString = "Failed to remove Word";
+                    }
                 }
                 retWindow.add(new JTextArea(resultString));
                 retWindow.setVisible(true);
