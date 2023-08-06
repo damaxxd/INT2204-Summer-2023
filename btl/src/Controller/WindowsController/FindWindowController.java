@@ -38,6 +38,11 @@ public class FindWindowController {
     }
     
     public static void addFavoriteWord(Word word) {
+        for (Word _word : Dictionary.favoriteWords) {
+            if (_word.getWordTarget().equals(word.getWordTarget())) {
+                return;
+            }
+        }
         Dictionary.favoriteWords.add(word);
     }
 
