@@ -42,7 +42,7 @@ public class HistoryWindow extends Window {
         panel = new JPanel();
 
         JPanel wordPanel = new JPanel();
-        wordPanel.setLayout(new BoxLayout(wordPanel, BoxLayout.Y_AXIS));
+        wordPanel.setLayout(new BoxLayout(wordPanel, BoxLayout.Y_AXIS)); // set words in vertical order.
         ArrayList<Word> currentHistory = HistoryWindowController.getHistoryWordsList();
 
         // Only allow target word to appear in history once

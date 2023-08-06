@@ -27,7 +27,7 @@ public class RemoveWindow extends Window {
     }
 
     @Override
-    /** 
+    /**
      * Init and config word removing window.
      */
     public void windowConfig() {
@@ -37,7 +37,7 @@ public class RemoveWindow extends Window {
     }
 
     @Override
-    /** 
+    /**
      * Init and config word removing panel.
      */
     public void panelConfig() {
@@ -47,31 +47,32 @@ public class RemoveWindow extends Window {
         panel.setLayout(layout);
 
         JLabel inputLabel = new JLabel("Enter word here:");
-        constraints.gridx = 0; // first column
-        constraints.gridy = 0; // first row
-        constraints.gridwidth = 1; // one column wide
-        constraints.gridheight = 1; // one row high
+        constraints.gridx = 0; // column
+        constraints.gridy = 0; // row
+        constraints.gridwidth = 1; // column width
+        constraints.gridheight = 1; // row height
         constraints.fill = GridBagConstraints.NONE; // do not resize
         constraints.weightx = 0; // no extra horizontal space
         constraints.weighty = 0; // no extra vertical space
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
+        constraints.insets = new Insets(5, 5, 5, 2); // some padding
         panel.add(inputLabel, constraints); // add component with constraints
-        
+
         JTextField inputLine = new JTextField();
-        constraints.gridx = 1; // second column
-        constraints.gridy = 0; // first row
-        constraints.gridwidth = 2; // two columns wide
-        constraints.gridheight = 1; // one row high
-        constraints.fill = GridBagConstraints.HORIZONTAL; // resize horizontally
-        constraints.weightx = 1; // extra horizontal space
-        constraints.weighty = 0; // no extra vertical space
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
-        panel.add(inputLine, constraints); // add component with constraints
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(5, 2, 5, 5);
+        panel.add(inputLine, constraints);
 
         // Remove button
         JButton removeButton = new JButton("Remove Word");
         removeButton.addActionListener(new ActionListener() {
             JFrame retWindow = new JFrame();
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // ***********************************
@@ -83,12 +84,13 @@ public class RemoveWindow extends Window {
                 retWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 retWindow.setSize(350, 300);
                 retWindow.setLocationRelativeTo(null);
-                
+
                 String targetWord = inputLine.getText(); // get word need to remove from user
-                
+
                 String resultString = "";
                 RemoveWindowController.removeInputWord(targetWord);
-                if (DictionaryManagement.getIndexByWord(targetWord) == -1) { // Remove successfully (get word index in dict = -1)
+                if (DictionaryManagement.getIndexByWord(targetWord) == -1) { // Remove successfully (get word index in
+                                                                             // dict = -1)
                     resultString = "Succesfully remove Word";
                 } else {
                     resultString = "Failed to remove Word";
@@ -97,17 +99,15 @@ public class RemoveWindow extends Window {
                 retWindow.setVisible(true);
             }
         });
-        panel.add(removeButton);
-        constraints.gridx = 0; // first column
-        constraints.gridy = 1; // second row
-        constraints.gridwidth = 3; // three columns wide
-        constraints.gridheight = 1; // one row high
-        constraints.fill = GridBagConstraints.NONE; // do not resize
-        constraints.weightx = 0; // no extra horizontal space
-        constraints.weighty = 0; // no extra vertical space
-        constraints.anchor = GridBagConstraints.CENTER; // center position
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
-        panel.add(removeButton, constraints); // add component with constraints
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 3;
+        constraints.gridheight = 1;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        constraints.anchor = GridBagConstraints.CENTER;
+        panel.add(removeButton, constraints);
     }
 
     @Override

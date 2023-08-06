@@ -42,7 +42,7 @@ public class MainWindow extends Window {
      */
     public void windowConfig() {
         window.setTitle("Dictionary Application");
-        window.setSize(300, 370);
+        window.setSize(300, 375);
         window.setLocationRelativeTo(null); // center the window to the screen
     }
 
