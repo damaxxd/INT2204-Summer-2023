@@ -6,7 +6,6 @@ import View.buttons.ClearHistoryButton;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Stack;
 
 import java.awt.FlowLayout;
 

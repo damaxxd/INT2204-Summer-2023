@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Controller.WindowsController.FavoriteWindowController;
-import Controller.WindowsController.HistoryWindowController;
 
 public class ClearFavoriteButton extends Button {
     public ClearFavoriteButton() {
