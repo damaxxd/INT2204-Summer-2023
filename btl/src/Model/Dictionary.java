@@ -1,18 +1,18 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.HashSet;
 
 public class Dictionary {
     public static ArrayList<Word> dict = new ArrayList<Word>();
 
     // store history of user's word finding
-    public static Stack<Word> historyWords = new Stack<Word>();
+    public static ArrayList<Word> historyWords = new ArrayList<Word>();
 
     // store user's favorite word
     public static ArrayList<Word> favoriteWords = new ArrayList<Word>();
 
-    public static Stack<Word> getHistoryWords() {
+    public static ArrayList<Word> getHistoryWords() {
         return historyWords;
     }
 
@@ -20,7 +20,11 @@ public class Dictionary {
         return favoriteWords;
     }
 
-    public static void clearHistoryWords() {
-        historyWords = new Stack<Word>();
+    public static void clearAllHistoryWords() {
+        historyWords.clear();
+    }
+
+    public static void clearAllFavoriteWords() {
+        favoriteWords.clear();
     }
 }

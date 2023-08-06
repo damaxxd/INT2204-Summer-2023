@@ -6,36 +6,19 @@ import Model.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DictionaryManagement {
-    private final static String HISTORY_PATH = "btl/src/resources/data/history.txt";
-    private final static String DATA_PATH = "btl/src/resources/data/dictionaries.txt";
+    private static final String DATA_PATH = "btl/src/resources/data/dictionaries.txt";
+    private static final String HISTORY_PATH = "btl/src/resources/data/history.txt";
+    private static final String FAVORITE_PATH = "btl/src/resources/data/favorites.txt";
 
-    private static Trie wordTrie = new Trie();
+    public static Trie wordTrie = new Trie();
 
     public DictionaryManagement() {
         
-    }
-
-    /**
-     * Add word to history.
-     */
-    public static void addWordHistory(Word word) {
-        Dictionary.historyWords.push(word);
-    }
-
-    /**
-     * Remove word in history.
-     */
-    public static void removeWordHistory(String targetWord) {
-        for (int i = 0; i < Dictionary.historyWords.size(); i++) {
-            if (Dictionary.historyWords.get(i).getWordTarget() == targetWord) {
-                Dictionary.historyWords.remove(i);
-                break;
-            }
-        }
     }
 
     /**
@@ -58,7 +41,7 @@ public class DictionaryManagement {
     /**
      * Load data from dictionary data file.
      */
-    public static void insertFromFile() throws IOException {
+    public static void loadDataFile() throws IOException {
         File file = new File(DATA_PATH);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
@@ -100,43 +83,6 @@ public class DictionaryManagement {
     }
 
     /**
-     * Add word to dictionary.
-     */
-    public static void addWord(String word_target, String word_explain) throws IOException {
-        Word word = new Word(word_target, word_explain);
-        Dictionary.dict.add(word);
-        wordTrie.insertWordToTrie(word);
-        dictionaryExportToFile();
-    }
-
-    /**
-    * Remove word from dictionary with parameter.
-    */
-    public static void removeWord(String targetWord) throws IOException {
-        int index = getIndexByWord(targetWord);
-        if (index != -1) {
-            Dictionary.dict.remove(index);
-            wordTrie.removeInTrie(targetWord);
-        }
-        dictionaryExportToFile();
-    }
-
-    /**
-     * Edit word in dictionary with parameter.
-     */
-    public static String editWord(String targetWord, String explainWord) throws IOException {
-        int index = getIndexByWord(targetWord);
-        if (index != -1) {
-            Dictionary.dict.get(index).setWordExplain(explainWord);
-            wordTrie.editInTrie(targetWord, explainWord);
-            dictionaryExportToFile();
-            return "Succesfully edit word";
-        } else {
-            return "Failed to edit word";
-        }
-    }
-
-    /**
      * Show words begin with string key.
      */
     public static ArrayList<String> dictionarySearcher(String key) throws IOException {
@@ -152,7 +98,7 @@ public class DictionaryManagement {
     /**
      * Export data to file.
      */
-    public static void dictionaryExportToFile() throws IOException {
+    public static void dictionaryWriteToFile() throws IOException {
         FileWriter writer = new FileWriter(DATA_PATH);
         for (Word word : Dictionary.dict) {
             writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
@@ -164,10 +110,16 @@ public class DictionaryManagement {
     /**
      * Write data to history file.
      */
-    public static void dictionaryExportToHistory() throws IOException {
+    public static void dictionaryWriteToHistory() throws IOException {
         FileWriter writer = new FileWriter(HISTORY_PATH);
-        for (Word word : Dictionary.historyWords) {
-            writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
+        HashSet<String> seenHistory = new HashSet<String>(); // prevent writing into file twice
+        for (int i = Dictionary.historyWords.size() - 1; i >= 0; i--) {
+            Word word = Dictionary.historyWords.get(i);
+            if (!seenHistory.contains(word.getWordTarget())) {
+                writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
+                seenHistory.add(word.getWordTarget());
+            }
+            
         }
         writer.close();
     }
@@ -179,6 +131,81 @@ public class DictionaryManagement {
         System.out.println("English ---- Vietnamese");
         for (Word word : Dictionary.dict) {
             System.out.format("%s\t%s \n", word.getWordTarget(), word.getWordExplain());
+        }
+    }
+
+    /**
+     * Write data to favorite file.
+     */
+    public static void dictionaryWriteToFavorite() throws IOException {
+        FileWriter writer = new FileWriter(FAVORITE_PATH);
+        HashSet<String> seenFavorite = new HashSet<>(); // prevent writing into file twice
+        for (int i = Dictionary.favoriteWords.size() - 1; i >= 0; i--) {
+            Word word = Dictionary.favoriteWords.get(i);
+            if (!seenFavorite.contains(word.getWordTarget())) {
+                writer.write(String.format("%s\t%s\n", word.getWordTarget(), word.getWordExplain()));
+                seenFavorite.add(word.getWordTarget());
+            }
+        }
+        writer.close();
+    }
+    
+    /**
+     * Load data from history file
+     */
+    public static void loadFavoriteFile() throws IOException {
+        File file = new File(FAVORITE_PATH);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String cur_line = sc.nextLine();
+            String[] split = cur_line.split("\\t");
+            if (split.length == 2) {
+                Word word = new Word(split[0], split[1]);
+                Dictionary.historyWords.add(word);
+            }
+        }
+        sc.close();
+    }
+
+    /**
+     * Load all files
+     */
+    public static void dictionaryLoadAllFiles() {
+        try {
+            DictionaryManagement.loadDataFile();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace() + "  Failed to load data file");
+        }
+        try {
+            DictionaryManagement.loadHistoryFile();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace() + "  Failed to load history file");
+        }
+        try {
+            DictionaryManagement.loadFavoriteFile();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace() + "  Failed to load favorite file");
+        }
+    }
+
+    /**
+     * Write to files
+     */
+    public static void dictionaryWriteToAllFiles() {
+        try {
+            DictionaryManagement.dictionaryWriteToFile();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace() + "  Failed to write data file");
+        }
+        try {
+            DictionaryManagement.dictionaryWriteToHistory();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace() + "  Failed to load history file");
+        }
+        try {
+            DictionaryManagement.dictionaryWriteToFavorite();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace() + "  Failed to load favorite file");
         }
     }
 }

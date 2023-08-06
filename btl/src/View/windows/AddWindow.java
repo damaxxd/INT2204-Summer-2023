@@ -43,59 +43,63 @@ public class AddWindow extends Window {
         GridBagConstraints constraints = new GridBagConstraints();
         panel.setLayout(layout);
 
-        JLabel enterWordNotice = new JLabel("Enter word here: ");
-        constraints.gridx = 0; // first column
-        constraints.gridy = 0; // first row
-        constraints.gridwidth = 1; // one column wide
-        constraints.gridheight = 1; // one row high
+        JLabel enterWordNotice = new JLabel("Enter word here:");
+        constraints.gridx = 0; // column
+        constraints.gridy = 0; // row
+        constraints.gridwidth = 1; // column width
+        constraints.gridheight = 1; // row height
         constraints.fill = GridBagConstraints.NONE; // do not resize
         constraints.weightx = 0; // no extra horizontal space
         constraints.weighty = 0; // no extra vertical space
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
+        constraints.anchor = GridBagConstraints.WEST; // set position
+        constraints.insets = new Insets(5, 5, 5, 2); // some padding
         panel.add(enterWordNotice, constraints); // add component with constraints
 
         JTextField targetWordLine = new JTextField();
-        constraints.gridx = 1; // second column
-        constraints.gridy = 0; // first row
-        constraints.gridwidth = 2; // two columns wide
-        constraints.gridheight = 1; // one row high
-        constraints.fill = GridBagConstraints.HORIZONTAL; // resize horizontally
-        constraints.weightx = 1; // extra horizontal space
-        constraints.weighty = 0; // no extra vertical space
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
-        panel.add(targetWordLine, constraints); // add component with constraints
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(5, 2, 5, 5);
+        panel.add(targetWordLine, constraints);
 
-        JLabel label2 = new JLabel("Enter explanation here: ");
-        constraints.gridx = 0; // first column
-        constraints.gridy = 1; // second row
-        constraints.gridwidth = 1; // one column wide
-        constraints.gridheight = 1; // one row high
-        constraints.fill = GridBagConstraints.NONE; // do not resize
-        constraints.weightx = 0; // no extra horizontal space
-        constraints.weighty = 0; // no extra vertical space
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
-        panel.add(label2, constraints); // add component with constraints
+        JLabel enterExplanationNotice = new JLabel("Enter explanation here:");
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.gridheight = 1;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(5, 5, 5, 2);
+        panel.add(enterExplanationNotice, constraints);
 
         JTextField explainWordLine = new JTextField();
-        constraints.gridx = 1; // second column
-        constraints.gridy = 1; // second row
-        constraints.gridwidth = 2; // two columns wide
-        constraints.gridheight = 1; // one row high
-        constraints.fill = GridBagConstraints.HORIZONTAL; // resize horizontally
-        constraints.weightx = 1; // extra horizontal space
-        constraints.weighty = 0; // no extra vertical space
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
-        panel.add(explainWordLine, constraints); // add component with constraints
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(5, 2, 5, 5);
+        panel.add(explainWordLine, constraints);
 
         // Add button
         JButton addButton = new JButton("Add Word");
         addButton.addActionListener(new ActionListener() {
+            JFrame retWindow = new JFrame();
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // ***********************************
                 // ***** DISPLAY RESULT WINDOW *******
                 // ***********************************
-                JFrame retWindow = new JFrame();
+                retWindow.dispose();
+                retWindow = new JFrame(); // close the previous result if clicked confirm button twice
                 retWindow.setTitle("Result");
                 retWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 retWindow.setSize(350, 300);
@@ -105,7 +109,9 @@ public class AddWindow extends Window {
                 String explainWord = explainWordLine.getText(); // get explain word need to add from user
 
                 String resultString = "";
-                AddWindowController.addNewWord(targetWord, explainWord);
+                if (targetWord.length() > 0 && explainWord.length() > 0) {
+                    AddWindowController.addNewWord(targetWord, explainWord);
+                }
                 if (DictionaryManagement.dictionaryLookup(targetWord) != "") { // Insert successfully
                     resultString = "Succesfully insert Word";
                 } else {
@@ -115,16 +121,15 @@ public class AddWindow extends Window {
                 retWindow.setVisible(true);
             }
         });
-        constraints.gridx = 0; // first column
-        constraints.gridy = 2; // third row
-        constraints.gridwidth = 3; // three columns wide
-        constraints.gridheight = 1; // one row high
-        constraints.fill = GridBagConstraints.NONE; // do not resize
-        constraints.weightx = 0; // no extra horizontal space
-        constraints.weighty = 0; // no extra vertical space
-        constraints.anchor = GridBagConstraints.CENTER; // center position
-        constraints.insets = new Insets(5, 5, 5, 5); // some padding
-        panel.add(addButton, constraints); // add component with constraints
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 3;
+        constraints.gridheight = 1;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        constraints.anchor = GridBagConstraints.CENTER;
+        panel.add(addButton, constraints);
     }
 
     @Override

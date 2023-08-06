@@ -1,13 +1,16 @@
 package View.windows;
 
 import java.util.ArrayList;
-
+import java.util.HashSet;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 
 import Controller.WindowsController.FavoriteWindowController;
 import Model.Word;
+import View.buttons.ClearFavoriteButton;
 
 public class FavoriteWindow extends Window {
     /**
@@ -33,14 +36,34 @@ public class FavoriteWindow extends Window {
      */
     public void panelConfig() {
         panel = new JPanel();
+
+        // Create a subpanel for word.
+        JPanel wordPanel = new JPanel();
+        wordPanel.setLayout(new BoxLayout(wordPanel, BoxLayout.Y_AXIS)); // set words in vertical order.
         ArrayList<Word> favoriteList = FavoriteWindowController.getFavoriteWordsList();
+        HashSet<String> seen = new HashSet<String>();
         int index = 1;
-        for (Word word : favoriteList) {
-            panel.add(new JLabel("   " + index + ". "
-                        + word.getWordTarget() + " : " + word.getWordExplain() + System.lineSeparator()));
-            index++;
+        for (int i = favoriteList.size() - 1; i >= 0; i--) {
+            Word word = favoriteList.get(i);
+            if (!seen.contains(word.getWordTarget())) {
+                wordPanel.add(new JLabel("   " + index + ". "
+                        + word.getWordTarget() +
+                        " : " + word.getWordExplain()
+                        + System.lineSeparator()));
+                seen.add(word.getWordTarget());
+                index++;
+            }
         }
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT)); // align left
+        wordPanel.add(new JLabel(System.lineSeparator()));
+
+        // Create a subpanel for clear button.
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton clearFavoriteButton = (new ClearFavoriteButton()).getButton();
+        buttonPanel.add(clearFavoriteButton);
+
+        panel.add(wordPanel);
+        panel.add(buttonPanel);
     }
 
     @Override
