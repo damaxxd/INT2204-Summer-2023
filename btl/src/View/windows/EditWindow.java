@@ -91,13 +91,15 @@ public class EditWindow extends Window {
         // Add button
         JButton editButton = new JButton("Edit Word");
         editButton.addActionListener(new ActionListener() {
+            JFrame retWindow = new JFrame();
             @Override
             public void actionPerformed(ActionEvent e) {
                 // ***********************************
                 // ***** DISPLAY RESULT WINDOW *******
                 // ***********************************
-                JFrame retWindow = new JFrame();
-                retWindow.setTitle("Result");
+                retWindow.dispose(); // close the previous result if clicked confirm button twice
+                retWindow = new JFrame();
+                retWindow.setTitle("Edit Result");
                 retWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 retWindow.setSize(350, 300);
                 retWindow.setLocationRelativeTo(null);
@@ -105,11 +107,12 @@ public class EditWindow extends Window {
                 String targetWord = targetWordLine.getText(); // get target word need to edit from user
                 String explainWord = explainWordLine.getText(); // get explain word need to edit from user
 
-                String resultString = EditWindowController.editTargetWord(targetWord, explainWord);
-                if (DictionaryManagement.dictionaryLookup(targetWord) == explainWord) { // Edit successfully
-                    resultString = "Succesfully edit Word";
-                } else {
-                    resultString = "Failed to edit Word";
+                String resultString = "Failed to edit Word";
+                if (targetWord.length() > 0 && explainWord.length() > 0) {
+                    resultString = EditWindowController.editTargetWord(targetWord, explainWord);
+                    if (DictionaryManagement.dictionaryLookup(targetWord) == explainWord) { // Edit successfully
+                        resultString = "Succesfully edit Word";
+                    }
                 }
                 retWindow.add(new JTextArea(resultString));
                 retWindow.setVisible(true);

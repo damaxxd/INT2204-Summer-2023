@@ -4,7 +4,8 @@ import Controller.WindowsController.HistoryWindowController;
 import Model.Word;
 import View.buttons.ClearHistoryButton;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Stack;
 
 import java.awt.FlowLayout;
@@ -42,12 +43,22 @@ public class HistoryWindow extends Window {
 
         JPanel wordPanel = new JPanel();
         wordPanel.setLayout(new BoxLayout(wordPanel, BoxLayout.Y_AXIS));
-        Stack<Word> currentHistory = HistoryWindowController.getHistoryWordsStack();
+        ArrayList<Word> currentHistory = HistoryWindowController.getHistoryWordsList();
+
+        // Only allow target word to appear in history once
+        // with recent most explain word
+        HashSet<String> seen = new HashSet<String>();
         int index = 1;
-        for (Word word : currentHistory) {
-            wordPanel.add(new JLabel("   " + index + ". "
-                    + word.getWordTarget() + " : " + word.getWordExplain() + System.lineSeparator()));
-            index++;
+        for (int i = currentHistory.size() - 1; i >= 0; i--) {
+            Word word = currentHistory.get(i);
+            if (!seen.contains(word.getWordTarget())) {
+                wordPanel.add(new JLabel("   " + index + ". "
+                        + word.getWordTarget() +
+                        " : " + word.getWordExplain()
+                        + System.lineSeparator()));
+                seen.add(word.getWordTarget());
+                index++;
+            }
         }
         wordPanel.add(new JLabel(System.lineSeparator()));
 

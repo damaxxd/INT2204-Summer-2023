@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import View.buttons.AddButton;
 import View.buttons.EditButton;
+import View.buttons.FavoriteButton;
 import View.buttons.FindButton;
 import View.buttons.HistoryButton;
 import View.buttons.RemoveButton;
@@ -32,6 +33,7 @@ public class MainWindow extends Window {
         removeButton = (new RemoveButton()).getButton();
         editButton = (new EditButton()).getButton();
         historyButton = (new HistoryButton()).getButton();
+        favoriteButton = (new FavoriteButton()).getButton();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class MainWindow extends Window {
      */
     public void windowConfig() {
         window.setTitle("Dictionary Application");
-        window.setSize(300, 320);
+        window.setSize(300, 370);
         window.setLocationRelativeTo(null); // center the window to the screen
     }
 
@@ -55,6 +57,7 @@ public class MainWindow extends Window {
         panel.add(removeButton);
         panel.add(editButton);
         panel.add(historyButton);
+        panel.add(favoriteButton);
     }
 
     @Override

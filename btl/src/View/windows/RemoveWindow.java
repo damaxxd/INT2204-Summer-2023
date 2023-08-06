@@ -71,12 +71,14 @@ public class RemoveWindow extends Window {
         // Remove button
         JButton removeButton = new JButton("Remove Word");
         removeButton.addActionListener(new ActionListener() {
+            JFrame retWindow = new JFrame();
             @Override
             public void actionPerformed(ActionEvent e) {
                 // ***********************************
                 // ***** DISPLAY RESULT WINDOW *******
                 // ***********************************
-                JFrame retWindow = new JFrame();
+                retWindow.dispose();
+                retWindow = new JFrame(); // close the previous result if clicked confirm button twice
                 retWindow.setTitle("Result");
                 retWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 retWindow.setSize(350, 300);

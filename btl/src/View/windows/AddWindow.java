@@ -90,12 +90,14 @@ public class AddWindow extends Window {
         // Add button
         JButton addButton = new JButton("Add Word");
         addButton.addActionListener(new ActionListener() {
+            JFrame retWindow = new JFrame();
             @Override
             public void actionPerformed(ActionEvent e) {
                 // ***********************************
                 // ***** DISPLAY RESULT WINDOW *******
                 // ***********************************
-                JFrame retWindow = new JFrame();
+                retWindow.dispose();
+                retWindow = new JFrame(); // close the previous result if clicked confirm button twice
                 retWindow.setTitle("Result");
                 retWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 retWindow.setSize(350, 300);
@@ -105,7 +107,9 @@ public class AddWindow extends Window {
                 String explainWord = explainWordLine.getText(); // get explain word need to add from user
 
                 String resultString = "";
-                AddWindowController.addNewWord(targetWord, explainWord);
+                if (targetWord.length() > 0 && explainWord.length() > 0) {
+                    AddWindowController.addNewWord(targetWord, explainWord);
+                }
                 if (DictionaryManagement.dictionaryLookup(targetWord) != "") { // Insert successfully
                     resultString = "Succesfully insert Word";
                 } else {

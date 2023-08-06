@@ -15,14 +15,8 @@ class DictionaryApplication {
              * Main program.
              */
             public void run() {
-                // Insert Word from file
-                try {
-                    DictionaryManagement.insertFromFile();
-                    DictionaryManagement.loadHistoryFile();
-                    FavoriteWindowController.loadFavoriteFile();
-                } catch (Exception e) {
-                    System.out.println(e.getStackTrace());
-                }
+                // Load files
+                DictionaryManagement.dictionaryLoadAllFiles();
                 
                 // Main window
                 MainWindow mainWindow = new MainWindow();

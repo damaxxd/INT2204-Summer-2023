@@ -1,6 +1,6 @@
 package Controller.WindowsController;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 import Controller.DictionaryManagement;
 import Model.Dictionary;
@@ -10,22 +10,34 @@ import View.windows.HistoryWindow;
 public class HistoryWindowController {
     private static HistoryWindow historyWindow = new HistoryWindow();
 
-    public static Stack<Word> getHistoryWordsStack() {
+    public static ArrayList<Word> getHistoryWordsList() {
         return Dictionary.getHistoryWords();
     }
 
-    public static void clearHistoryWordsStack() {
-        Dictionary.clearHistoryWords();
+    public static void clearHistoryWordsList() {
+        Dictionary.clearAllHistoryWords();
         try {
-            DictionaryManagement.dictionaryExportToHistory();
+            DictionaryManagement.dictionaryWriteToHistory();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
 
     /**
+     * Add word to history.
+     */
+    public static void addWordHistory(Word word) {
+        for (Word _word : Dictionary.historyWords) {
+            if (_word.getWordTarget().equals(word.getWordTarget())) {
+                return;
+            }
+        }
+        Dictionary.historyWords.add(word);
+    }
+
+    /**
      * Somehow JFrame dispose method don't clear all the data so we close (dispose)
-     * and then create a new find Window object.
+     * and then create a new findWindow object.
      */
     public static void disposeWindow() {
         historyWindow.closeWindow();

@@ -15,7 +15,7 @@ public class FindButton extends Button {
 
     @Override
     /**
-     * Find Button config.
+     * Favorite Button config.
      */
     public void buttonConfig() {
         button.setText("Find Word");

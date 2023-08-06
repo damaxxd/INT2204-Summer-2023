@@ -4,10 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Controller.WindowsController.FavoriteWindowController;
 import Controller.WindowsController.HistoryWindowController;
 
-public class ClearHistoryButton extends Button {
-    public ClearHistoryButton() {
+public class ClearFavoriteButton extends Button {
+    public ClearFavoriteButton() {
         super();
     }
 
@@ -15,15 +16,15 @@ public class ClearHistoryButton extends Button {
      * Button config.
      */
     public void buttonConfig() {
-        button.setText("Clear History");
+        button.setText("Clear Favorite Words");
         button.setPreferredSize(new Dimension(200, 50));
 
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HistoryWindowController.clearHistoryWordsList();
-                HistoryWindowController.disposeWindow();
-                HistoryWindowController.openWindow();
+                FavoriteWindowController.clearFavoriteWordsList();
+                FavoriteWindowController.disposeWindow();
+                FavoriteWindowController.openWindow();
             }
         });
     }

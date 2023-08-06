@@ -1,6 +1,13 @@
 package Controller.WindowsController;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import Controller.DictionaryManagement;
+import Model.Dictionary;
 import Model.Word;
 import View.windows.FindWindow;
 
@@ -9,16 +16,29 @@ public class FindWindowController {
 
     public static String findWord(String targetWord) {
         if (DictionaryManagement.getIndexByWord(targetWord) != -1) { // found target word
-            String explainWord = DictionaryManagement.dictionaryLookup(targetWord);
-            DictionaryManagement.addWordHistory(new Word(targetWord, explainWord));
+            String explainWord = DictionaryManagement.wordTrie.lookup(targetWord);
+            HistoryWindowController.addWordHistory(new Word(targetWord, explainWord));
             try {
-                DictionaryManagement.dictionaryExportToHistory();
+                DictionaryManagement.dictionaryWriteToHistory();
             } catch (Exception e) {
                 System.out.println(e.getStackTrace());
             }
             return explainWord;
         }
         return "";
+    }
+
+    public static void addToFavoriteList(Word word) {
+        try {
+            addFavoriteWord(word);
+            DictionaryManagement.dictionaryWriteToFavorite();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+    }
+    
+    public static void addFavoriteWord(Word word) {
+        Dictionary.favoriteWords.add(word);
     }
 
     /**
@@ -33,4 +53,6 @@ public class FindWindowController {
     public static void openWindow() {
         findWindow.displayWindow();
     }
+
+
 }
