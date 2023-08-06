@@ -37,7 +37,6 @@ acquire	v. /ə'kwaiə/ dành được, đạt được, kiếm được
 across	adv., prep. /ə'krɔs/ qua, ngang qua
 act	n., v. /ækt/ hành động, hành vi, cử chỉ, đối xử
 action	n. /'ækʃn/ hành động, hành vi, tác động
-action	hành động
 active	adj. /'æktiv/ tích cực hoạt động, nhanh nhẹn
 actively	adv. /'æktivli/
 activity	n. /æk'tiviti/
@@ -3412,7 +3411,6 @@ weight	n. /'weit/ trọng lượng
 welcome	v., adj., n., exclamation /'welkʌm/ chào mừng, hoan nghênh
 well	adv., adj., exclamation /wel/ tốt, giỏi; ôi, may quá!
 well known	adj. /´wel´noun/ nổi tiếng, được nhiều người biết đến
-well known	know
 west	n., adj., adv. /west/ phía Tây, theo phía tây, về hướng tây
 western	adj. /'westn/ về phía tây, của phía tây
 wet	adj. /wɛt/ ướt, ẩm ướt
