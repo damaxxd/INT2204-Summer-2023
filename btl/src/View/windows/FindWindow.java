@@ -1,10 +1,12 @@
 package View.windows;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 
 import Controller.WindowsController.FindWindowController;
 import Model.Word;
+import View.buttons.PronounceButton;
 
 /**
  * Word Finding Window Configuration
@@ -88,6 +91,12 @@ public class FindWindow extends Window {
                 resWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 resWindow.setSize(350, 300);
                 resWindow.setLocationRelativeTo(null);
+
+                JPanel resPanel = new JPanel();
+                resPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+
+                JButton proButton = (new PronounceButton()).getButton();
+                resPanel.add(proButton);
                 
                 String targetWord = inputLine.getText().toLowerCase(); // get input from user
                 String resultWord = FindWindowController.findWord(targetWord);
@@ -97,7 +106,8 @@ public class FindWindow extends Window {
                 } else { // find the word
                     resultTextArea = new JTextArea("  " + targetWord + " :  " + resultWord); 
                 }
-                resWindow.add(resultTextArea);
+                resPanel.add(resultTextArea);
+                resWindow.add(resPanel);
                 resWindow.setVisible(true);
             }
         });
