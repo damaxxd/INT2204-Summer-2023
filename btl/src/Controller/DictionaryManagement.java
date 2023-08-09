@@ -3,7 +3,9 @@ package Controller;
 import java.util.Scanner;
 
 import Model.*;
+import services.Connector;
 
+import java.sql.ResultSet;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -161,10 +163,27 @@ public class DictionaryManagement {
             String[] split = cur_line.split("\\t");
             if (split.length == 2) {
                 Word word = new Word(split[0], split[1]);
-                Dictionary.historyWords.add(word);
+                Dictionary.favoriteWords.add(word);
             }
         }
         sc.close();
+    }
+
+    
+    public static void loadFromDatabase() {
+        Connector.createConnection();
+        String queryStatement = "SELECT word, explainWord FROM tbl_edict";
+        try {
+            ResultSet queryResult = Connector.executeQueryStatement(queryStatement);
+            while (queryResult.next()) {
+                Word word = new Word(queryResult.getString(1), queryResult.getString(2));
+                Dictionary.dict.add(word);
+                wordTrie.insertWordToTrie(word);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        Connector.closeAllConnection();
     }
 
     /**
@@ -172,9 +191,9 @@ public class DictionaryManagement {
      */
     public static void dictionaryLoadAllFiles() {
         try {
-            DictionaryManagement.loadDataFile();
+            DictionaryManagement.loadFromDatabase();
         } catch (Exception e) {
-            System.out.println(e.getStackTrace() + "  Failed to load data file");
+            System.out.println(e.getStackTrace() + "  Failed to load from database");
         }
         try {
             DictionaryManagement.loadHistoryFile();

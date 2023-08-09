@@ -41,4 +41,10 @@ public abstract class Window {
         window.dispose();
     }
 
+    /**
+     * Get status of this window
+     */
+    public boolean isOpen() {
+        return window.isVisible();
+    }
 }

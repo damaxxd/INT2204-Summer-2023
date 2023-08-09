@@ -1,7 +1,9 @@
 package Controller.WindowsController;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 
+import services.Connector;
 import Controller.DictionaryManagement;
 import Model.Dictionary;
 import View.windows.HistoryWindow;
@@ -11,6 +13,19 @@ public class RemoveWindowController {
     private static RemoveWindow removeWindow = new RemoveWindow();
 
     public static void removeInputWord(String targetWord) {
+
+        // Remove in database
+        Connector.createConnection();
+        String queryStatement = "DELETE FROM tbl_edict WHERE word = '" + targetWord + "'";
+        try {
+            Connector.executeUpdateStatement(queryStatement);
+        } catch (Exception e) { // queryResult is null, word not found or invalid query statement
+            System.out.println(e.getMessage());
+        }
+
+        Connector.closeAllConnection();
+
+        // Remove in program backend
         try {
             removeWord(targetWord);
             removeWordInHistory(targetWord);
