@@ -1,6 +1,5 @@
 package View.windows;
 
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -101,7 +100,8 @@ public class FindWindow extends Window {
                 resWindow.setLocationRelativeTo(null);
 
                 JPanel resPanel = new JPanel();
-                resPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+                resPanel.setLayout(new GridBagLayout());
+                GridBagConstraints constraints = new GridBagConstraints();
 
                 JButton proButton = (new PronounceButton()).getButton();
 
@@ -112,10 +112,30 @@ public class FindWindow extends Window {
                     resultTextArea = new JTextArea("Word does not exist in dictionary!");
                 } else { // find the word
                     resultTextArea = new JTextArea("  " + targetWord + " :  " + resultWord);
-                    resPanel.add(proButton);
+                    constraints.gridx = 0; // column
+                    constraints.gridy = 0; // row
+                    constraints.fill = GridBagConstraints.HORIZONTAL; // do not resize
+                    constraints.weightx = 0; // no extra horizontal space
+                    constraints.weighty = 0; // no extra vertical space
+                    constraints.insets = new Insets(5, 5, 5, 5); // some padding
+                    constraints.anchor = GridBagConstraints.NORTHWEST; // set position
+                    resPanel.add(proButton, constraints);
+
                 }
-                resPanel.add(resultTextArea);
+                resultTextArea.setLineWrap(true);
+                resultTextArea.setWrapStyleWord(true);
+                constraints.gridx = 0;
+                constraints.gridy = 1;
+                constraints.fill = GridBagConstraints.BOTH;
+                constraints.weightx = 1;
+                constraints.weighty = 1;
+                constraints.insets = new Insets(0, 0, 0, 0);
+                constraints.anchor = GridBagConstraints.CENTER;
+
+                resPanel.add(resultTextArea, constraints);
                 resWindow.add(resPanel);
+                resPanel.setPreferredSize(resWindow.getSize());
+                resWindow.pack();
                 resWindow.setVisible(true);
             }
         });
