@@ -17,33 +17,33 @@ public class FindWindowController {
     private static FindWindow findWindow = new FindWindow();
 
     public static String findWord(String targetWord) {
-        // Connector.createConnection();
-        // String queryStatement = "SELECT explainWord FROM tbl_edict WHERE word = '" + targetWord + "'";
-        // String resultWord = "";
-        // try {
-        //     ResultSet queryResult = Connector.executeStatement(queryStatement);
-        //     while (queryResult.next()) {
-        //         resultWord = queryResult.getString("explainWord");
-        //     }
-        // } catch (Exception e) { // queryResult is null, word not found or invalid query statement
-        //     System.out.println(e.getMessage());
-        //     resultWord = "";
-        // }
-
-        // Connector.closeAllConnection();
-        // return resultWord;
-
-        if (DictionaryManagement.getIndexByWord(targetWord) != -1) { // found target word
-            String explainWord = DictionaryManagement.wordTrie.lookup(targetWord);
-            HistoryWindowController.addWordHistory(new Word(targetWord, explainWord));
-            try {
-                DictionaryManagement.dictionaryWriteToHistory();
-            } catch (Exception e) {
-                System.out.println(e.getStackTrace());
+        Connector.createConnection();
+        String queryStatement = "SELECT explainWord FROM tbl_edict WHERE word = '" + targetWord + "'";
+        String resultWord = "";
+        try {
+            ResultSet queryResult = Connector.executeQueryStatement(queryStatement);
+            while (queryResult.next()) {
+                resultWord = queryResult.getString("explainWord");
             }
-            return explainWord;
+        } catch (Exception e) { // queryResult is null, word not found or invalid query statement
+            System.out.println(e.getMessage());
+            resultWord = "";
         }
-        return "";
+
+        Connector.closeAllConnection();
+        return resultWord;
+
+        // if (DictionaryManagement.getIndexByWord(targetWord) != -1) { // found target word
+        //     String explainWord = DictionaryManagement.wordTrie.lookup(targetWord);
+        //     HistoryWindowController.addWordHistory(new Word(targetWord, explainWord));
+        //     try {
+        //         DictionaryManagement.dictionaryWriteToHistory();
+        //     } catch (Exception e) {
+        //         System.out.println(e.getStackTrace());
+        //     }
+        //     return explainWord;
+        // }
+        // return "";
     }
 
     public static void addToFavoriteList(Word word) {
